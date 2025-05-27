@@ -446,7 +446,10 @@ body {
     margin: 0 auto;
     padding: 0 40px;
 }
-
+.testimonials h2,
+.testimonials .section-subtitle {
+    text-align: center;
+}
 .testimonials-grid {
     display: flex;
     gap: 20px;
@@ -626,21 +629,82 @@ body {
 }
 @media (max-width: 600px) {
     .why-section {
-        padding: 32px 0 24px 0;
+        padding: 18px 0 12px 0;
+        margin-bottom: 12px;
+    }
+    .why-choose-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        max-width: 100vw;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        overflow: hidden;
+        padding: 0;
+    }
+    .why-choose-right {
+        order: 1;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fff;
+        border-radius: 18px 18px 0 0;
+        padding: 0;
+        margin: 0;
     }
     .why-choose-img {
         width: 100%;
-        max-width: 100%;
-        border-radius: 14px;
+        max-width: 340px;
+        border-radius: 16px 16px 0 0;
+        object-fit: cover;
+        margin: 0 auto;
+        display: block;
     }
-    .why-choose-left h2 {
-        font-size: 1.3rem;
+    .why-choose-left {
+        order: 2;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #fff;
+        padding: 0 0 12px 0;
     }
-    .why-choose-subtitle {
-        font-size: 1rem;
+    .why-choose-list {
+        width: 100%;
+        max-width: 340px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
     }
     .why-choose-item {
-        font-size: 0.98rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1rem;
+        font-weight: 500;
+        background: #fff;
+        border-radius: 0;
+        padding: 10px 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .why-choose-item:last-child {
+        border-bottom: none;
+    }
+    .why-choose-plus {
+        color: #ff9000;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-left: 18px;
+        user-select: none;
+    }
+    .why-choose-text {
+        color: #222;
+        margin-left: 0;
     }
 }
 
@@ -1390,6 +1454,91 @@ body {
     width: 100%;
     justify-content: center;
   }
+  .treatments-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+  }
+  .treatment-card {
+    display: flex;
+    flex-direction: column;
+    width: 95vw;
+    max-width: 340px;
+    min-width: 0;
+    border-radius: 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    overflow: hidden;
+    background: #fff;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .treatment-image {
+    width: 100%;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 18px 18px 0 0;
+  }
+  .treatment-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0;
+    margin-bottom: 0;
+    display: block;
+  }
+  .treatment-card > div:not(.treatment-image) {
+    padding: 1.2rem 1rem 1.2rem 1rem;
+    background: #fff;
+    text-align: left;
+  }
+  .treatment-card h3 {
+    font-size: 1.08rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: #222;
+  }
+  .treatment-card p {
+    font-size: 0.98rem;
+    color: #555;
+    margin-bottom: 0.7rem;
+  }
+  .treatment-card ul {
+    margin: 0 0 1rem 1.2rem;
+    padding-left: 1.2rem;
+    font-size: 0.97rem;
+    color: #444;
+  }
+  .treatment-card li {
+    margin-bottom: 0.2rem;
+  }
+  .price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #222;
+    margin: 0.5rem 0 1.2rem 0;
+  }
+  .btn-book {
+    width: 100%;
+    background: #ff9000;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 13px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.3s;
+    box-shadow: none;
+  }
+  .btn-book:hover {
+    background: #e67c00;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -1409,22 +1558,24 @@ body {
         flex: 0 0 calc(50% - 10px); /* 2 cards */
     }
     .review-img {
-        height: 160px;
+        height: 260px;
     }
     .review-card {
-        height: 250px;
+        height: 350px;
     }
 }
 
 @media (max-width: 480px) {
+    .patient-reviews h2 {
+    white-space: nowrap;
+    font-size: 1.5rem; /* Adjust as needed for fit */
+  }
     .review-card {
         flex: 0 0 calc(100% - 10px); /* 1 card */
+        height: 460px;
     }
     .review-img {
-        height: 120px;
-    }
-    .review-card {
-        height: 180px;
+        height: 340px;
     }
 }
 
@@ -1697,4 +1848,50 @@ body {
   .services-icons-desktop {
     display: block !important;
   }
+}
+
+@media (max-width: 900px) {
+    .stats-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+        padding: 10px 0;
+        flex-wrap: nowrap;
+        background: #fff9f4;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+    }
+    .stats-item {
+        display: none;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex: 1 1 0;
+        min-width: 0;
+        text-align: left;
+        font-size: 1rem;
+        gap: 8px;
+        color: #4b2b16;
+        background: transparent;
+        border-radius: 0;
+        font-weight: 500;
+    }
+    .stats-item:nth-last-child(-n+3) {
+        display: flex !important;
+    }
+    .stats-icon {
+        font-size: 2rem !important;
+        margin-bottom: 0;
+        color: #4b2b16;
+        min-width: 32px;
+        text-align: center;
+    }
+    .stats-item strong, .stats-item .highlight {
+        color: #ff9000;
+        font-weight: 700;
+        font-size: 1.05em;
+        margin-right: 2px;
+    }
 }
