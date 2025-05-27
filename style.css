@@ -1563,3 +1563,138 @@ body {
         padding: 15px 0;
     }
 }
+
+/* HEADER: Responsive for mobile/tablet */
+@media (max-width: 900px) {
+  .nav-wrapper {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-height: unset;
+    gap: 0;
+  }
+  .logo {
+    justify-content: flex-start;
+    width: auto;
+  }
+  .header-actions {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 0;
+    padding-right: 0;
+  }
+  .btn-appointment {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 20px;
+  }
+  .phone {
+    display: inline-block;
+    font-size: 0.95rem;
+    margin-left: 0.5rem;
+    font-weight: 600;
+  }
+  .mobile-menu-toggle {
+    display: none !important; /* Hide hamburger menu on mobile */
+  }
+  .nav {
+    display: none !important;
+  }
+}
+
+/* HERO SECTION: Responsive stacking for mobile/tablet */
+@media (max-width: 900px) {
+  .hero-section {
+    flex-direction: column;
+    padding: 0;
+    min-height: unset;
+  }
+  .hero-left {
+    width: 100%;
+    min-height: 180px;
+    padding: 0;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+  }
+  .hero-left img.hero-bg-img {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    object-fit: cover;
+  }
+  /* Service icons below image, above form */
+  .services-icons {
+    order: 2;
+    width: 100%;
+    margin: 0 auto 1rem auto;
+    padding: 0.5rem 0;
+  }
+  .stats-bar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.98rem;
+  }
+  .stats-item {
+    min-width: 100px;
+    width: 33%;
+    justify-content: center;
+    font-size: 0.98rem;
+  }
+  /* Show only the last three service icons on mobile */
+  .stats-item {
+    display: none;
+  }
+  .stats-item:nth-last-child(-n+3) {
+    display: flex;
+  }
+  .hero-form-container {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+    border-radius: 0 0 18px 18px;
+  }
+  .hero-form-container h2,
+  .hero-form-container p {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-item {
+    width: 100%;
+    min-width: unset;
+    font-size: 0.95rem;
+  }
+  .hero-form-container {
+    padding: 0.8rem 0.2rem 0.8rem 0.2rem;
+  }
+}
+
+/* Hide Book Appointment button in header for mobile */
+@media (max-width: 900px) {
+  .header-actions .btn-appointment {
+    display: none !important;
+  }
+  .services-icons-desktop {
+    display: none !important;
+  }
+  .services-icons-mobile {
+    display: block !important;
+    width: 100%;
+    margin: 0 auto 1rem auto;
+    padding: 0.5rem 0;
+  }
+}
+@media (min-width: 901px) {
+  .services-icons-mobile {
+    display: none !important;
+  }
+  .services-icons-desktop {
+    display: block !important;
+  }
+}

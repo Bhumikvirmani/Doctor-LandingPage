@@ -21,36 +21,91 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Form submission
-    const appointmentForm = document.querySelector('.appointment-form');
-    if (appointmentForm) {
-        appointmentForm.addEventListener('submit', function(e) {
+    // --- Form Logic for both Hero and Book Appointment Forms ---
+    function initializeForm(form) {
+        if (!form) return;
+        
+        const nameInput = form.querySelector('input[placeholder="Name"]');
+        const mobileInput = form.querySelector('input[placeholder="Mobile Number"], input[placeholder="Phone"]');
+        const captchaInput = form.querySelector('input[placeholder="Captcha"]');
+        const captchaBox = form.querySelector('.captcha-box, .book-captcha-box');
+        const termsCheckbox = form.querySelector('input[type="checkbox"]');
+
+        // Generate random 4-digit captcha
+        function generateCaptcha() {
+            return Math.floor(1000 + Math.random() * 9000).toString();
+        }
+
+        // Set a new captcha
+        function setCaptcha() {
+            const newCaptcha = generateCaptcha();
+            captchaBox.textContent = newCaptcha;
+        }
+
+        // On page load, set captcha
+        setCaptcha();
+
+        // Make captcha clickable
+        captchaBox.style.cursor = 'pointer';
+        captchaBox.title = 'Click to refresh captcha';
+        captchaBox.addEventListener('click', setCaptcha);
+
+        // Form submission handler
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('name') || this.querySelector('input[type="text"]').value;
-            const phone = formData.get('phone') || this.querySelector('input[type="tel"]').value;
-            const city = formData.get('city') || this.querySelector('select').value;
-            
-            // Basic validation
-            if (!name || !phone || !city) {
-                alert('Please fill in all required fields.');
+            const name = nameInput.value.trim();
+            const mobile = mobileInput.value.trim();
+            const captcha = captchaInput.value.trim();
+            const captchaValue = captchaBox.textContent.trim();
+            const termsChecked = termsCheckbox.checked;
+
+            // Simple validation
+            if (!name) {
+                alert('Please enter your name.');
+                nameInput.focus();
                 return;
             }
-            
-            // Phone number validation
-            const phoneRegex = /^[6-9]\d{9}$/;
-            if (!phoneRegex.test(phone)) {
-                alert('Please enter a valid 10-digit phone number.');
+            if (!/^\d{10}$/.test(mobile)) {
+                alert('Please enter a valid 10-digit mobile number.');
+                mobileInput.focus();
                 return;
             }
-            
-            // Simulate form submission
-            alert('Thank you! Your appointment request has been submitted. We will contact you shortly.');
-            this.reset();
+            if (captcha !== captchaValue) {
+                alert('Captcha does not match. Please try again.');
+                captchaInput.value = '';
+                setCaptcha();
+                captchaInput.focus();
+                return;
+            }
+            if (!termsChecked) {
+                alert('You must agree to the terms and privacy policy.');
+                termsCheckbox.focus();
+                return;
+            }
+
+            // Save to localStorage
+            const formData = {
+                name,
+                mobile,
+                timestamp: new Date().toISOString()
+            };
+            let submissions = JSON.parse(localStorage.getItem('formSubmissions') || '[]');
+            submissions.push(formData);
+            localStorage.setItem('formSubmissions', JSON.stringify(submissions));
+
+            // Success feedback
+            alert('Thank you! Your consultation request has been saved.');
+            form.reset();
+            setCaptcha();
         });
     }
+
+    // Initialize both forms
+    const heroForm = document.querySelector('.hero-form-container form');
+    const bookAppointmentForm = document.querySelector('.book-appointment-form');
+
+    initializeForm(heroForm);
+    initializeForm(bookAppointmentForm);
     
     // FAQ accordion functionality
     const faqItems = document.querySelectorAll('.faq-item h3');
